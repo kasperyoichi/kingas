@@ -1,0 +1,31 @@
+-- Kasper - Stretch Fishing Bar
+
+local player = game.Players.LocalPlayer
+local gui = player:WaitForChild("PlayerGui")
+
+task.spawn(function()
+    while true do
+        task.wait(0.05)
+
+        local fishingUI = gui:FindFirstChild("FishingUI")
+        if fishingUI then
+            local bg = fishingUI:FindFirstChild("FishingBackground")
+            if bg then
+                local bar = bg:FindFirstChild("FishingBar")
+                if bar then
+
+                    -- FORÇA A BARRA A SER ENORME
+                    bar.Size = UDim2.new(
+                        1, 0,       -- ocupa toda a largura disponível
+                        bar.Size.Y.Scale, bar.Size.Y.Offset
+                    )
+
+                    -- Centraliza ela, caso o jogo tente mover
+                    bar.Position = UDim2.new(0.5, -bar.AbsoluteSize.X/2, 
+                                             bar.Position.Y.Scale, bar.Position.Y.Offset)
+
+                end
+            end
+        end
+    end
+end) 
